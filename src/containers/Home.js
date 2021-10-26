@@ -2,17 +2,21 @@ import React, { useState } from 'react'
 
 export const Home = () => {
     const [state, setstate] = useState(0)
-    function handleClick() {
-        setstate(prevState => prevState + 1)
-        setstate(prevState => prevState + 5)
-    }
     return (
         <div>
-            <button onClick={() => setstate(state - 1)}>-</button>
+            <Button s={setstate} />
             {state}
-            <button onClick={handleClick}>+</button>
+            <ButtonDestructured setstate={setstate} state={state} />
         </div>
     )
 }
 
 export default Home
+
+
+const Button = (props) => {
+    return <button onClick={() => props.s(prevState => prevState - 1)}>-</button>
+}
+const ButtonDestructured = ({ setstate, ...rest }) => {
+    return <button onClick={() => setstate(prevState => prevState + 1)}>+</button>
+}
