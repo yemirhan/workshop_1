@@ -1,28 +1,17 @@
+import axios from 'axios'
 import React, { useState, useEffect } from 'react'
-import { Button, ButtonDestructured } from './Button'
-import { Input } from './Input'
 
 export const Home = () => {
-    const [state, setstate] = useState(0)
-    const [value, setValue] = useState("")
+    const [data, setdata] = useState(null)
+    const fetchData = async () => await axios.get("https://api.nasa.gov/planetary/apod?api_key=2gxas4LusuRoMS86UYUUONRCYxMeVqXMoKtY3RL5")
     useEffect(() => {
-        console.log("mounted!");
+        fetchData().then(t => setdata(t.data))
     }, [])
-    useEffect(() => {
-        console.log(value);
-    }, [value])
-    useEffect(() => {
-        console.log(value);
-    }, [state])
-    useEffect(() => {
-        console.log("updated!");
-    })
+    if (!data) return <div>loading...</div>
     return (
         <div>
-            <Button s={setstate} />
-            {state}
-            <ButtonDestructured setstate={setstate} state={state} />
-            <Input value={value} onChange={({ target: { value } }) => setValue(value)} />
+            {data.explanation}
+            {/* {data?.explanation || "loading..."} ES6 */}
         </div>
     )
 }
