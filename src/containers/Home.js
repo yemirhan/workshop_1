@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Button, ButtonDestructured } from './Button'
 
 export const Home = () => {
     const [state, setstate] = useState(0)
@@ -14,9 +15,3 @@ export const Home = () => {
 export default Home
 
 
-const Button = (props) => {
-    return <button onClick={() => props.s(prevState => prevState - 1)}>-</button>
-}
-const ButtonDestructured = ({ setstate, ...rest }) => {
-    return <button onClick={() => setstate(prevState => prevState + 1)}>+</button>
-}
